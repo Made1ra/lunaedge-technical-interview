@@ -26,19 +26,14 @@ export default function App() {
   } = useForm<FormData>();
 
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([]);
+  const [value, setValue] = useState<Array<Pokemon>>([{ name: 'bulbasaur' }]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const firstNameInputRef = useRef(null);
   const lastNameInputRef = useRef(null);
-  const selectRef = useRef<HTMLSelectElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const baseUrl = 'https://pokeapi.co/api/v2';
-
-  const handlePokemonSelectChange = (selectedPokemon: Pokemon[]) => {
-    if (selectedPokemon.length !== 4) {
-      console.error('Select exactly 4 Pokemon');
-    }
-  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -51,16 +46,7 @@ export default function App() {
   }
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
-    try {
-      await axios.post(baseUrl, data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      openModal();
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+    openModal();
   };
 
   useEffect(() => {
@@ -77,7 +63,10 @@ export default function App() {
 
   return (
     <div className="flex align-center justify-center">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col align-center justify-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col align-center justify-center"
+      >
         <div className="flex flex-col align-center justify-center mt-8">
           <label htmlFor="firstName">First Name</label>
           <Input
@@ -113,10 +102,11 @@ export default function App() {
               required: 'This information is required.',
               validate: (value) => value?.length === 4 || 'Select exactly 4 Pokemon'
             })}
+            ref={ref}
             multiple
-            ref={selectRef}
             options={pokemons}
-            onSelectChange={handlePokemonSelectChange}
+            value={value}
+            onChange={(o) => setValue(o)}
           />
           {errors.pokemonTeam && <span>{errors.pokemonTeam.message}</span>}
         </div>
@@ -124,7 +114,10 @@ export default function App() {
           <Button>Submit</Button>
         </div>
       </form>
-      <Modal isOpen={isModalOpen} onClose={closeModal} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 }
