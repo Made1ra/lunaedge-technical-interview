@@ -23,6 +23,7 @@ export default function App() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<FormData>();
 
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([]);
@@ -47,6 +48,7 @@ export default function App() {
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     openModal();
+    reset();
   };
 
   useEffect(() => {
