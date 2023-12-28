@@ -23,10 +23,17 @@ export default function App() {
   } = useForm<FormData>();
 
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([]);
+  const [selectedPokemons, setSelectedPokemons] = useState<Array<string>>([]);
   const [pokemonSprites, setPokemonSprites] = useState<Array<string>>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const baseUrl = 'https://pokeapi.co/api/v2';
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const options = [...e.target.selectedOptions];
+    const values = options.map(option => option.value);
+    setSelectedPokemons(values);
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -110,6 +117,8 @@ export default function App() {
             })}
             multiple
             className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            value={selectedPokemons}
+            onChange={(e) => handleChange(e)}
           >
             {pokemons.map((pokemon) => (
               <option key={pokemon.name} value={pokemon.name}>
