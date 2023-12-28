@@ -73,7 +73,7 @@ export default function App() {
     <div className="flex align-center justify-center">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col align-center justify-center">
         <div className="flex flex-col align-center justify-center mt-8">
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="firstName" className="ml-2">First Name</label>
           <input
             {...register('firstName', {
               required: 'This information is required.',
@@ -88,7 +88,7 @@ export default function App() {
           {errors.firstName && <span>This information is required.</span>}
         </div>
         <div className="flex flex-col align-center justify-center mt-4">
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="lastName" className="ml-2">Last Name</label>
           <input
             {...register('lastName', {
               required: 'This information is required.',
@@ -109,6 +109,7 @@ export default function App() {
               validate: (value) => value?.length === 4 || 'Select exactly 4 Pokemon',
             })}
             multiple
+            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             {pokemons.map((pokemon) => (
               <option key={pokemon.name} value={pokemon.name}>
@@ -121,12 +122,14 @@ export default function App() {
         <div className="flex align-center justify-center">
           <button
             type="submit"
-            className="flex items-center justify-center w-24 h-5 mt-4 text-white bg-indigo-800 rounded-sm
-            sm:h-6 md:h-8 lg:h-10 xl:h-12"
+            className="flex items-center justify-center w-32 h-5 mt-4 text-white bg-indigo-800 rounded-sm
+            sm:h-6 md:h-8 lg:h-10 xl:h-12
+            hover:opacity-90
+            active:opacity-90"
           >
-            <StarIcon className="w-6 h-6 fill-current" />
+            <StarIcon className="w-6 h-6 fill-current mx-2" />
             Submit
-            <ChevronDownIcon className="w-6 h-6" />
+            <ChevronDownIcon className="w-6 h-6 mx-2" />
           </button>
         </div>
       </form>
