@@ -92,7 +92,7 @@ export default function App() {
             className="w-max h-10 rounded-lg border mx-2 px-3 py-4 gap-2
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           />
-          {errors.firstName && <span>This information is required.</span>}
+          {errors.firstName && <span className="ml-2">This information is required.</span>}
         </div>
         <div className="flex flex-col align-center justify-center mt-4">
           <label htmlFor="lastName" className="ml-2">Last Name</label>
@@ -107,7 +107,7 @@ export default function App() {
             className="w-max h-10 rounded-lg border mx-2 px-3 py-4 gap-2
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           />
-          {errors.lastName && <span>This information is required.</span>}
+          {errors.lastName && <span className="ml-2">This information is required.</span>}
         </div>
         <div className="flex flex-col align-center justify-center mt-4">
           <label htmlFor="pokemonTeam">Select your Pokemon Team (4 Pokemon)</label>
@@ -116,7 +116,7 @@ export default function App() {
               validate: (value) => value?.length === 4 || 'Select exactly 4 Pokemon',
             })}
             multiple
-            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             value={selectedPokemons}
             onChange={(e) => handleChange(e)}
           >
