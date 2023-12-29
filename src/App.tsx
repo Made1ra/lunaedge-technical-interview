@@ -77,7 +77,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="flex align-center justify-center">
+    <div className="w-96 m-auto mt-10 flex align-center justify-center self-center border">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col align-center justify-center">
         <div className="flex flex-col align-center justify-center mt-8">
           <label htmlFor="firstName" className="ml-2">First Name</label>
@@ -131,7 +131,7 @@ export default function App() {
         <div className="flex align-center justify-center">
           <button
             type="submit"
-            className="flex items-center justify-center w-32 h-5 mt-4 text-white bg-indigo-800 rounded-sm
+            className="flex items-center justify-center w-32 h-5 mt-4 text-white bg-indigo-800 rounded
             sm:h-6 md:h-8 lg:h-10 xl:h-12
             hover:opacity-90
             active:opacity-90"
